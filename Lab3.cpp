@@ -13,6 +13,8 @@ class orderedList{
     protected:
         orderedList *next;
         orderedList *previous;
+        orderedList *head;
+        int size;
         int compAdd = 0;
         int moveAdd = 0;//comparison and move counters (seemed helpful from the template)
         int compRemove = 0;
@@ -23,7 +25,12 @@ class orderedList{
             this->item = item;
             this->next = next;
             this->previous = previous;
-
+            if(this->previous == nullptr){
+                this->head = this;
+            }
+            else{
+                this->head = this->previous->head;
+            }
         }
         orderedList(orderedList *next = nullptr){
             this->item = nullptr;
@@ -38,6 +45,27 @@ class orderedList{
             }
         }
         void GetItem(X item){
+            if(item == this->item){
+                return item
+            }
+            if(item < this->item){
+                if(this->previous == nullptr){
+                    return nullptr
+                }
+                return this->previous->GetItem(item);
+            }
+            else{
+                if(this->next == nullptr){
+                    return nullptr
+                }
+                return this->next->GetItem(item);
+            }
+        }
+        bool IsInList(X item){
+
+        }
+
+        void AsciiArt(){
 
         }
 };
@@ -102,6 +130,16 @@ class Student{
                     return false;
                 }
             }
+        void AsciiArt(){
+            for(int i = 0; i < this->MNumber.length(); i++){
+                if(MNumber[i] % 2 == 1){
+                    cout << "//";
+                }
+                else{
+                    cout << "\\";
+                }
+            }
+        }
         
 };
 void TestProgram(){
